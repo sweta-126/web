@@ -24,20 +24,35 @@
         img {
             float: right;
         }
-        .icon{
-            display: flex;
-            justify-content: center;
-            text-align: center;
+        .theme-light {
+            --color-primary: #0060df;
+            --color-secondary: #f8c8c8;
+            --color-accent: #fd6f53;
+            --font-color: #000000;
         }
-        .icon ul li {
-            display: inline-block;
-            width: 100px;
-            height: 100px;
-            color: rgb(219, 8, 8);
+        .theme-dark {
+            --color-primary: #17ed90;
+            --color-secondary: #0f1111;
+            --color-accent: #12cdea;
+            --font-color: #ffffff;
+        }
+        .container {
+            display: flex;
+        
+            background: var(--color-secondary);
+            flex-direction: column;
+            justify-content:center;
+            align-items: center;
+        }
+        .container button {
+            color: var(--font-color);
+            background: var(--color-primary);
+        
         }
     </style>
 </head>
 <body>
+    <div class="container">
   <div class="header">
       <h1>WELCOME TO MY PAGE &#128522</h1>
   </div>
@@ -60,15 +75,33 @@
 <li>Listening music</li></ul>
 </div>
 </div>
-<div>
-    <h2 style="text-align: center; color: rgb(95, 36, 36);">CONTACT ME &#128071</h2>
-    <div class="icon">
-<ul >
-    <li><i class="fab fa-2x fa-facebook-square"></i></li>
-    <li><i class="fab fa-2x fa-github-square"></i></li>
-    <li><i class="fab fa-2x fa-linkedin"></i></li>
-</ul>
+<button id="switch" onclick="toggleTheme()">Switch</button>
 </div>
-</div>
+<script>
+    function setTheme(themeName)
+    {
+        localStorage.setItem('theme', themeName);
+        document.documentElement.className = themeName;
+    }
+    function toggleTheme()
+    {
+        if(localStorage.getItem('theme') === 'theme-dark')
+        {
+            setTheme('theme-light');
+        }
+        else {
+            setTheme('theme-dark');
+        }
+    }
+    ( function () {
+      if(localStorage.getItem('theme') === 'theme-dark')
+        {
+            setTheme('theme-dark');
+        }
+        else {
+            setTheme('theme-light');
+        }  
+    })();
+</script>
 </body>
 </html>
